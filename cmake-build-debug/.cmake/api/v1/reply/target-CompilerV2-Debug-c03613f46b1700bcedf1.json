@@ -111,7 +111,8 @@
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				7
+				7,
+				8
 			]
 		}
 	],
@@ -159,6 +160,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "t1.i",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "t2.i",
 			"sourceGroupIndex" : 2
 		}
 	],

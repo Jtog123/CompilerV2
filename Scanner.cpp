@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 
+
 using namespace std;
 
 /*
@@ -42,40 +43,53 @@ bool Scanner::matchNextChar(char expectedChar) {
 
 
 
-void Scanner::readFile() {
+Token Scanner::getToken() {
     // while we are not at the end of the file
     // gather each char and look for each word
+
+    Token token;
 
     while(! inputFile.eof()) {
         char currentChar = inputFile.peek();
 
         // check for new lines
         if (currentChar == '\n') {
-            cout << "END OF LINE" << endl;
+            //cout << "END OF LINE" << endl;
             inputFile.get();
-            tokenStream.push_back({EOL, "\\n"});
+            //tokenStream.push_back({EOL, "\\n"});
             _lineNumber++;
+            token.setToken(EOL, "\\n");
+            return token;
+
 
         }
         else if(currentChar == ' ') {
-            cout << "Whitespace" << endl;
+            //cout << "Whitespace" << endl;
             inputFile.get();
+            continue;
+
+
         }
         else if(currentChar == ',') {
-            cout << "Comma" << endl;
+            //cout << "Comma" << endl;
             inputFile.get();
-            tokenStream.push_back({COMMA, ","});
+            token.setToken(COMMA, ",");
+            return token;
+            //tokenStream.push_back({COMMA, ","});
         }
         else if(currentChar == '/') {
             inputFile.get();
             if(matchNextChar('/')) {
-                cout << "Comment" << endl;
-                tokenStream.push_back({COMMENT, "//"});
+                //cout << "Comment" << endl;
+                //tokenStream.push_back({COMMENT, "//"});
+                token.setToken(COMMENT, "//");
 
                 //Encounter a comment get the whole line till we reach a new line
                 while(inputFile.peek() != '\n') {
                     inputFile.get();
                 }
+
+                return token;
             }
             else {
                 //unget initial slash ??
@@ -86,13 +100,15 @@ void Scanner::readFile() {
             if(matchNextChar('>')) {
 
                 //check token before it push into back no matter what
-                int lastOperation = tokenStream.size() - 1;
-                if(tokenStream[lastOperation].first == TokenType::COMMA) {
-                    cout << "Syntax error on line: " << _lineNumber << " missing valid data type" << endl;
-                }
+                //int lastOperation = tokenStream.size() - 1;
+                //if(tokenStream[lastOperation].first == TokenType::COMMA) {
+                //    cout << "Syntax error on line: " << _lineNumber << " missing valid data type" << endl;
+                //}
 
-                cout << "Got Into" << endl;
-                tokenStream.push_back({INTO,"=>"});
+                //cout << "Got Into" << endl;
+                //tokenStream.push_back({INTO,"=>"});
+                token.setToken(INTO, "=>");
+                return token;
 
 
             }
@@ -125,7 +141,9 @@ void Scanner::readFile() {
                 //    inputFile.get();
                 //}
             }
-            tokenStream.push_back({CONSTANT, number});
+            //tokenStream.push_back({CONSTANT, number});
+            token.setToken(CONSTANT, number);
+            return token;
             /*
             if(validInt) {
                 cout << "got number: " << number << endl;
@@ -157,8 +175,10 @@ void Scanner::readFile() {
                 //After each word if next char is not a space report an error sith the line number
                 // Error should probably be thrown here
                 if(validateSpacing()) {
-                    cout << "Got STORE" << endl;
-                    tokenStream.push_back({MEMOP, "store"});
+                    //cout << "Got STORE" << endl;
+                    //tokenStream.push_back({MEMOP, "store"});
+                    token.setToken(MEMOP, "store");
+                    return token;
                 }
                 else {
                     cout << "Syntax Error on line: " << _lineNumber << " did you mean store?" << endl;
@@ -168,8 +188,10 @@ void Scanner::readFile() {
             }
                 // Looking for SUB
             else if(matchNextChar('u') && matchNextChar('b')) {
-                cout << "Got SUB" << endl;
-                tokenStream.push_back({ARITHOP, "sub"});
+                //cout << "Got SUB" << endl;
+                //tokenStream.push_back({ARITHOP, "sub"});
+                token.setToken(ARITHOP, "sub");
+                return token;
 
             }
 
@@ -182,11 +204,15 @@ void Scanner::readFile() {
 
                 //Check for accetped state LOADL
                 if(matchNextChar('I')) {
-                    cout << "Got LOADI" << endl;
-                    tokenStream.push_back({LOADI, "loadi"});
+                    //cout << "Got LOADI" << endl;
+                    //tokenStream.push_back({LOADI, "loadi"});
+                    token.setToken(LOADI, "loadi");
+                    return token;
                 } else {
-                    cout << "Got LOAD" << endl;
-                    tokenStream.push_back({MEMOP, "load"});
+                    //cout << "Got LOAD" << endl;
+                    //tokenStream.push_back({MEMOP, "load"});
+                    token.setToken(MEMOP, "load");
+                    return token;
                 }
 
 
@@ -194,8 +220,10 @@ void Scanner::readFile() {
             }
             else if (matchNextChar('s') && matchNextChar('h') && matchNextChar('i') && matchNextChar('f') &&
                      matchNextChar('t')) {
-                cout << "Got lshift" << endl;
-                tokenStream.push_back({ARITHOP, "lshift"});
+                //cout << "Got lshift" << endl;
+                //tokenStream.push_back({ARITHOP, "lshift"});
+                token.setToken(ARITHOP, "lshift");
+                return token;
             }
             else {
 
@@ -207,8 +235,10 @@ void Scanner::readFile() {
             inputFile.get();
             if(matchNextChar('s') && matchNextChar('h') && matchNextChar('i')
                && matchNextChar('f') && matchNextChar('t')) {
-                cout << "Got RSHIFT" << endl;
-                tokenStream.push_back({ARITHOP, "rshift"});
+                //cout << "Got RSHIFT" << endl;
+                //tokenStream.push_back({ARITHOP, "rshift"});
+                token.setToken(ARITHOP, "rshift");
+                return token;
 
             }
             else {
@@ -229,8 +259,10 @@ void Scanner::readFile() {
                         registerName += inputFile.peek();
                         inputFile.get();
                     }
-                    cout << registerName << endl;
-                    tokenStream.push_back({REGISTER, registerName});
+                    //cout << registerName << endl;
+                    //tokenStream.push_back({REGISTER, registerName});
+                    token.setToken(REGISTER, registerName);
+                    return token;
                 }
 
 
@@ -262,24 +294,30 @@ void Scanner::readFile() {
         else if (currentChar == 'm') {
             inputFile.get();
             if(matchNextChar('u') && matchNextChar('l') && matchNextChar('t')) {
-                cout << "got mult" << endl;
-                tokenStream.push_back({ARITHOP, "mult"});
+                //cout << "got mult" << endl;
+                //tokenStream.push_back({ARITHOP, "mult"});
+                token.setToken(ARITHOP, "mult");
+                return token;
             }
         }
             // Words what start with A {ADD}
         else if(currentChar == 'a') {
             inputFile.get();
             if(matchNextChar('d') && matchNextChar('d')) {
-                cout << "Got Add" << endl;
-                tokenStream.push_back({ARITHOP, "add"});
+                //cout << "Got Add" << endl;
+                //tokenStream.push_back({ARITHOP, "add"});
+                token.setToken(ARITHOP, "add");
+                return token;
             }
         }
             // Words what start with N {NOP}
         else if(currentChar == 'n') {
             inputFile.get();
             if(matchNextChar('o') && matchNextChar('p')) {
-                cout << "Got nop" << endl;
-                tokenStream.push_back({NOP, "nop"});
+                //cout << "Got nop" << endl;
+                //tokenStream.push_back({NOP, "nop"});
+                token.setToken(NOP, "nop");
+                return token;
             }
         }
             // Words what start with O {OUTPUT}
@@ -287,18 +325,34 @@ void Scanner::readFile() {
             inputFile.get();
             if(matchNextChar('u') && matchNextChar('t') && matchNextChar('p')
                && matchNextChar('u') && matchNextChar('t')) {
-                cout << "Got output" << endl;
-                tokenStream.push_back({OUTPUT, "output"});
+                //cout << "Got output" << endl;
+               // tokenStream.push_back({OUTPUT, "output"});
+               token.setToken(OUTPUT, "output");
+               return token;
 
             }
         }
         else {
             inputFile.get();
-            cout << "nothing now" << endl;
+            //cout << "invalid token or character" << endl;
+
+
         }
 
     }
-    tokenStream.push_back({_EOF, "eof"});
+
+    //tokenStream.push_back({_EOF, "eof"});
+    token.setToken(_EOF, "eof");
+    return token;
+
+    //if(inputFile.eof()) {
+    //    cout << "End of file." << endl;
+     //   token.setToken(_EOF, "eof");
+    //    return token;
+    //}
+
+
+
     //enum read as an int
     cout << endl;
     cout << "Reading out Tokens : " << endl;

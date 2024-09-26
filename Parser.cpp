@@ -9,8 +9,23 @@ using namespace std;
 
 void Parser::printTokens() {
 
-    myScanner.readFile();
+    Token token;
 
+    do {
+        token = myScanner.getToken();
+        token.print();
+
+    } while( token.getLexeme() != "eof");
+
+    //while (token.getLexeme() != "eof") {
+    //    token = myScanner.getToken();
+    //    cout << "Tokens is: " << endl;
+    //    token.print();
+    //}
+
+
+    cout << "it ended" << endl;
+    /*
     for(auto token : myScanner.tokenStream) {
         cout << "Token is: " << token.second << endl;
 
@@ -18,4 +33,5 @@ void Parser::printTokens() {
             cout << "CHECKING WE got Airthop" << endl;
         }
     }
+     */
 }

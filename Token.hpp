@@ -4,9 +4,24 @@
 
 #ifndef COMPILERV2_TOKEN_HPP
 #define COMPILERV2_TOKEN_HPP
+#include "TokenType.hpp"
+#include <string>
 
-
+using namespace std;
 class Token {
+
+    private:
+        TokenType tokenType;
+        string lexeme;
+
+    public:
+        Token();
+        void setToken(TokenType type, string lex);
+        TokenType getTokenType();
+        string getLexeme();
+        void print();
+
+
 
 };
 

@@ -17,7 +17,8 @@ enum TokenType{
     INTO, // 8
     _EOF, // 9
     EOL, // 10
-    COMMENT // 11
+    COMMENT, // 11
+    TBD // 12
 
 };
 

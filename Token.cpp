@@ -3,3 +3,23 @@
 //
 
 #include "Token.hpp"
+#include <iostream>
+
+using namespace std;
+
+Token::Token(): tokenType(TBD), lexeme("") {
+    // init empty token
+}
+
+void Token::setToken(TokenType type, string lex) {
+    tokenType = type;
+    lexeme = lex;
+}
+
+string Token::getLexeme() {
+    return lexeme;
+}
+
+void Token::print() {
+    cout << "Token is: " << lexeme << endl;
+}

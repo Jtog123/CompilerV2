@@ -9,7 +9,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "TokenType.hpp"
+//#include "TokenType.hpp"
+#include "Token.hpp"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ private:
 
 public:
     Scanner(const string& filePath);
-    void readFile();
+    Token getToken();
     bool matchNextChar(char);
     vector<pair <TokenType, string> > tokenStream;  // TokenType, lexeme
 };
