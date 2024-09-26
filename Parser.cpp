@@ -15,23 +15,8 @@ void Parser::printTokens() {
         token = myScanner.getToken();
         token.print();
 
-    } while( token.getLexeme() != "eof");
-
-    //while (token.getLexeme() != "eof") {
-    //    token = myScanner.getToken();
-    //    cout << "Tokens is: " << endl;
-    //    token.print();
-    //}
-
+    } while(token.getLexeme() != "eof");
 
     cout << "it ended" << endl;
-    /*
-    for(auto token : myScanner.tokenStream) {
-        cout << "Token is: " << token.second << endl;
 
-        if(token.first == TokenType::ARITHOP) {
-            cout << "CHECKING WE got Airthop" << endl;
-        }
-    }
-     */
 }

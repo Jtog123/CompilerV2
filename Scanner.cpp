@@ -56,7 +56,6 @@ Token Scanner::getToken() {
         if (currentChar == '\n') {
             //cout << "END OF LINE" << endl;
             inputFile.get();
-            //tokenStream.push_back({EOL, "\\n"});
             _lineNumber++;
             token.setToken(EOL, "\\n");
             return token;
@@ -67,21 +66,16 @@ Token Scanner::getToken() {
             //cout << "Whitespace" << endl;
             inputFile.get();
             continue;
-
-
         }
         else if(currentChar == ',') {
             //cout << "Comma" << endl;
             inputFile.get();
             token.setToken(COMMA, ",");
             return token;
-            //tokenStream.push_back({COMMA, ","});
         }
         else if(currentChar == '/') {
             inputFile.get();
             if(matchNextChar('/')) {
-                //cout << "Comment" << endl;
-                //tokenStream.push_back({COMMENT, "//"});
                 token.setToken(COMMENT, "//");
 
                 //Encounter a comment get the whole line till we reach a new line
@@ -99,14 +93,6 @@ Token Scanner::getToken() {
             inputFile.get();
             if(matchNextChar('>')) {
 
-                //check token before it push into back no matter what
-                //int lastOperation = tokenStream.size() - 1;
-                //if(tokenStream[lastOperation].first == TokenType::COMMA) {
-                //    cout << "Syntax error on line: " << _lineNumber << " missing valid data type" << endl;
-                //}
-
-                //cout << "Got Into" << endl;
-                //tokenStream.push_back({INTO,"=>"});
                 token.setToken(INTO, "=>");
                 return token;
 
@@ -126,12 +112,6 @@ Token Scanner::getToken() {
             //potential non digit character
             char nextChar = inputFile.peek();
 
-            //input file 5 throwing an error for line 10
-            //if(nextChar == '\n') {
-            //    _lineNumber++;
-            //    tokenStream.push_back({TokenType::EOL, "\\n"});
-            //}
-
             if(nextChar != ' ' && nextChar != '=' && nextChar != ',' && nextChar != '\n') {
                 cout << "Syntax error on line invalid Int operation: " << _lineNumber << endl;
                 //validInt = false;
@@ -141,9 +121,10 @@ Token Scanner::getToken() {
                 //    inputFile.get();
                 //}
             }
-            //tokenStream.push_back({CONSTANT, number});
+
             token.setToken(CONSTANT, number);
             return token;
+
             /*
             if(validInt) {
                 cout << "got number: " << number << endl;
@@ -176,7 +157,6 @@ Token Scanner::getToken() {
                 // Error should probably be thrown here
                 if(validateSpacing()) {
                     //cout << "Got STORE" << endl;
-                    //tokenStream.push_back({MEMOP, "store"});
                     token.setToken(MEMOP, "store");
                     return token;
                 }
@@ -189,7 +169,6 @@ Token Scanner::getToken() {
                 // Looking for SUB
             else if(matchNextChar('u') && matchNextChar('b')) {
                 //cout << "Got SUB" << endl;
-                //tokenStream.push_back({ARITHOP, "sub"});
                 token.setToken(ARITHOP, "sub");
                 return token;
 
@@ -205,12 +184,10 @@ Token Scanner::getToken() {
                 //Check for accetped state LOADL
                 if(matchNextChar('I')) {
                     //cout << "Got LOADI" << endl;
-                    //tokenStream.push_back({LOADI, "loadi"});
                     token.setToken(LOADI, "loadi");
                     return token;
                 } else {
                     //cout << "Got LOAD" << endl;
-                    //tokenStream.push_back({MEMOP, "load"});
                     token.setToken(MEMOP, "load");
                     return token;
                 }
@@ -235,8 +212,7 @@ Token Scanner::getToken() {
             inputFile.get();
             if(matchNextChar('s') && matchNextChar('h') && matchNextChar('i')
                && matchNextChar('f') && matchNextChar('t')) {
-                //cout << "Got RSHIFT" << endl;
-                //tokenStream.push_back({ARITHOP, "rshift"});
+
                 token.setToken(ARITHOP, "rshift");
                 return token;
 
@@ -250,23 +226,22 @@ Token Scanner::getToken() {
                 if(inputFile.eof() || ! isdigit(inputFile.peek())) {
                     cout << "Syntax on line : "<< _lineNumber << " not a valid register discard: " << (char)inputFile.peek() << endl;
 
-                    //eat broken register until we reach a space
                 }
-                    //we have a valid register
+                //we have a valid register
                 else if (isdigit(inputFile.peek())) {
                     while(isdigit(inputFile.peek())) {
 
                         registerName += inputFile.peek();
                         inputFile.get();
                     }
-                    //cout << registerName << endl;
-                    //tokenStream.push_back({REGISTER, registerName});
+
                     token.setToken(REGISTER, registerName);
                     return token;
                 }
 
 
                 //We encounter a register check which operation is being preformed on the register
+                /*
                 int registerOperation = tokenStream.size() - 2;
 
                 if(tokenStream[registerOperation].first != TokenType::ARITHOP &&
@@ -278,6 +253,7 @@ Token Scanner::getToken() {
 
 
                 }
+                 */
 
 
             }
