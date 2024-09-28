@@ -117,7 +117,11 @@ Token Scanner::getToken() {
             char nextChar = inputFile.peek();
 
             if(nextChar != ' ' && nextChar != '=' && nextChar != ',' && nextChar != '\n') {
-                //cout << "Syntax error on line invalid Int operation: " << _lineNumber << endl;
+                cout << "Syntax error on line " << _lineNumber << endl;
+                token.setToken(LEXICAL_ERROR, "syn_err");
+                eatTillDelimiter();
+                return token;
+
                 //validInt = false;
 
                 //eat characters until a space or newline or end of file

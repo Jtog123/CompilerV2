@@ -2,6 +2,12 @@
 // Created by jtog8 on 9/7/2024.
 //
 
+
+
+
+#ifndef COMPILERV2_TOKENTYPE_HPP
+#define COMPILERV2_TOKENTYPE_HPP
+
 //C++ wont let me use EOF
 // Already defined?
 
@@ -24,8 +30,4 @@ enum TokenType{
 
 };
 
-
-#ifndef COMPILERLAB1_TOKENTYPE_HPP
-#define COMPILERLAB1_TOKENTYPE_HPP
-
-#endif //COMPILERLAB1_TOKENTYPE_HPP
+#endif //COMPILERV2_TOKENTYPE_HPP

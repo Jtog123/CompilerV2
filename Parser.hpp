@@ -2,8 +2,8 @@
 // Created by jtog8 on 9/21/2024.
 //
 
-#ifndef COMPILERLAB1_PARSER_HPP
-#define COMPILERLAB1_PARSER_HPP
+#ifndef COMPILERV2_PARSER_HPP
+#define COMPILERV2_PARSER_HPP
 
 #include "scanner.hpp"
 #include <string>
@@ -25,4 +25,4 @@ private:
 };
 
 
-#endif //COMPILERLAB1_PARSER_HPP
+#endif //COMPILERV2_PARSER_HPP

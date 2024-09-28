@@ -4,3 +4,14 @@
 10	670	7492419978113969	CMakeFiles/CompilerV2.dir/Token.cpp.obj	a00baa976df6ab49
 14	556	7492434751045973	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
 3	561	7492490944301397	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
+4	797	7492507863477117	CMakeFiles/CompilerV2.dir/main.cpp.obj	11cb4e85d4b96a28
+19	803	7492507863590584	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
+13	841	7492507863999828	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
+844	1131	7492507866820688	CompilerV2.exe	5266be87b175d5e4
+17	837	7492508884762982	CMakeFiles/CompilerV2.dir/Token.cpp.obj	a00baa976df6ab49
+5	916	7492508885877181	CMakeFiles/CompilerV2.dir/main.cpp.obj	11cb4e85d4b96a28
+42	945	7492508886196960	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
+29	990	7492508886660099	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
+991	1210	7492508888750326	CompilerV2.exe	5266be87b175d5e4
+8	833	7492511076757391	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
+833	1113	7492511079498728	CompilerV2.exe	5266be87b175d5e4
