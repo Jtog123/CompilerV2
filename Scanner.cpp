@@ -37,7 +37,6 @@ void Scanner::eatTillDelimiter() {
     }
 }
 
-//Helper function how badly does the cost modulartity and readability affect the compiler?
 bool Scanner::matchNextChar(char expectedChar) {
     char currentChar = inputFile.peek();
     if(currentChar == expectedChar) {

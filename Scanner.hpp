@@ -2,8 +2,8 @@
 // Created by jtog8 on 9/5/2024.
 //
 
-#ifndef COMPILERLAB1_SCANNER_HPP
-#define COMPILERLAB1_SCANNER_HPP
+#ifndef COMPILERV2_SCANNER_HPP
+#define COMPILERV2_SCANNER_HPP
 
 #include <fstream>
 #include <iostream>
@@ -33,4 +33,4 @@ public:
 
 
 
-#endif //COMPILERLAB1_SCANNER_HPP
+#endif //COMPILERV2_SCANNER_HPP
