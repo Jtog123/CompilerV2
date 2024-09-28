@@ -28,8 +28,13 @@ Scanner::Scanner(const string& filePath)  {
     }
 }
 
-bool Scanner::validateSpacing() {
-    return matchNextChar(' ');
+void Scanner::eatTillDelimiter() {
+    while(!matchNextChar(' ') && !matchNextChar(',') && !inputFile.eof()) {
+        if(matchNextChar('\n'))
+            _lineNumber++;
+        else
+            inputFile.get();
+    }
 }
 
 //Helper function how badly does the cost modulartity and readability affect the compiler?
@@ -113,7 +118,7 @@ Token Scanner::getToken() {
             char nextChar = inputFile.peek();
 
             if(nextChar != ' ' && nextChar != '=' && nextChar != ',' && nextChar != '\n') {
-                cout << "Syntax error on line invalid Int operation: " << _lineNumber << endl;
+                //cout << "Syntax error on line invalid Int operation: " << _lineNumber << endl;
                 //validInt = false;
 
                 //eat characters until a space or newline or end of file
@@ -151,27 +156,29 @@ Token Scanner::getToken() {
             inputFile.get();
             // Looking for STORE
             if(matchNextChar('t') && matchNextChar('o') && matchNextChar('r')
-               && matchNextChar('e')) {
+               && matchNextChar('e') && matchNextChar(' ')) {
 
                 //After each word if next char is not a space report an error sith the line number
                 // Error should probably be thrown here
-                if(validateSpacing()) {
-                    //cout << "Got STORE" << endl;
+
+                //cout << "Got STORE" << endl;
                     token.setToken(MEMOP, "store");
                     return token;
                 }
-                else {
-                    cout << "Syntax Error on line: " << _lineNumber << " did you mean store?" << endl;
-                }
 
 
-            }
                 // Looking for SUB
-            else if(matchNextChar('u') && matchNextChar('b')) {
+            else if(matchNextChar('u') && matchNextChar('b') && matchNextChar(' ')) {
                 //cout << "Got SUB" << endl;
                 token.setToken(ARITHOP, "sub");
                 return token;
 
+            }
+            else {
+                cout << "Syntax Error on line: " << _lineNumber << " did you mean store or sub?" << endl;
+                token.setToken(LEXICAL_ERROR, "syn_err");
+                eatTillDelimiter();
+                return token;
             }
 
         }
@@ -224,7 +231,10 @@ Token Scanner::getToken() {
 
                 // is char after r a number or not
                 if(inputFile.eof() || ! isdigit(inputFile.peek())) {
-                    cout << "Syntax on line : "<< _lineNumber << " not a valid register discard: " << (char)inputFile.peek() << endl;
+                    cout << "Syntax error on line : "<< _lineNumber << " not a valid register "<< endl;
+                    token.setToken(LEXICAL_ERROR, "syn_err");
+                    eatTillDelimiter();
+                    return token;
 
                 }
                 //we have a valid register
@@ -279,10 +289,15 @@ Token Scanner::getToken() {
             // Words what start with A {ADD}
         else if(currentChar == 'a') {
             inputFile.get();
-            if(matchNextChar('d') && matchNextChar('d')) {
+            if(matchNextChar('d') && matchNextChar('d') && matchNextChar(' ')) {
                 //cout << "Got Add" << endl;
                 //tokenStream.push_back({ARITHOP, "add"});
                 token.setToken(ARITHOP, "add");
+                return token;
+            }
+            else{
+                cout << "Syntax error on line: " << _lineNumber  << endl;
+                token.setToken(LEXICAL_ERROR, "syn_err");
                 return token;
             }
         }

@@ -18,9 +18,12 @@ enum TokenType{
     _EOF, // 9
     EOL, // 10
     COMMENT, // 11
-    TBD // 12
+    TBD, // 12,
+    LEXICAL_ERROR,
+    PARSING_ERROR
 
 };
+
 
 #ifndef COMPILERLAB1_TOKENTYPE_HPP
 #define COMPILERLAB1_TOKENTYPE_HPP

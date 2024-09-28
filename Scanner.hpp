@@ -25,6 +25,7 @@ public:
     Scanner(const string& filePath);
     Token getToken();
     bool matchNextChar(char);
+    void eatTillDelimiter();
     //vector<pair <TokenType, string> > tokenStream;  // TokenType, lexeme
 };
 
