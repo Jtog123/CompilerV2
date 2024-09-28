@@ -12,4 +12,8 @@ add_executable(CompilerV2 main.cpp
         Parser.cpp
         t1.i
         t2.i
-        t18.i)
+        t18.i
+        t3.i
+        t9.i
+        t17.i
+        t4.i)

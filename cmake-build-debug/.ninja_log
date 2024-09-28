@@ -1,10 +1,6 @@
 # ninja log v5
 9	545	7492434750927660	CMakeFiles/CompilerV2.dir/main.cpp.obj	11cb4e85d4b96a28
-519	693	7492435727753563	CompilerV2.exe	5266be87b175d5e4
+562	1721	7492490955850855	CompilerV2.exe	5266be87b175d5e4
 10	670	7492419978113969	CMakeFiles/CompilerV2.dir/Token.cpp.obj	a00baa976df6ab49
 14	556	7492434751045973	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
-3	518	7492435726042373	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
-2	427	7492444912007763	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
-428	1180	7492444919473768	CompilerV2.exe	5266be87b175d5e4
-3	506	7492445922673858	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
-506	662	7492445924190400	CompilerV2.exe	5266be87b175d5e4
+3	561	7492490944301397	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736

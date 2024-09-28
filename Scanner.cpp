@@ -189,13 +189,18 @@ Token Scanner::getToken() {
             if(matchNextChar('o') && matchNextChar('a') && matchNextChar('d')){
 
                 //Check for accetped state LOADL
-                if(matchNextChar('I')) {
+                if(matchNextChar('I') && matchNextChar(' ')) {
                     //cout << "Got LOADI" << endl;
                     token.setToken(LOADI, "loadi");
                     return token;
-                } else {
+                } else if(matchNextChar(' ')) {
                     //cout << "Got LOAD" << endl;
                     token.setToken(MEMOP, "load");
+                    return token;
+                }
+                else {
+                    cout << "Syntax Error did you mean load or loadI? " << endl;
+                    token.setToken(LEXICAL_ERROR, "syn_err");
                     return token;
                 }
 
@@ -203,7 +208,7 @@ Token Scanner::getToken() {
 
             }
             else if (matchNextChar('s') && matchNextChar('h') && matchNextChar('i') && matchNextChar('f') &&
-                     matchNextChar('t')) {
+                     matchNextChar('t') && matchNextChar(' ')) {
                 //cout << "Got lshift" << endl;
                 //tokenStream.push_back({ARITHOP, "lshift"});
                 token.setToken(ARITHOP, "lshift");
@@ -211,14 +216,16 @@ Token Scanner::getToken() {
             }
             else {
 
-                //unget?
+                cout << "Syntax Error on line " << _lineNumber << endl;
+                token.setToken(LEXICAL_ERROR, "syn_err");
+                return token;
             }
         }
             // Words what start with R {RSHIFT}
         else if( currentChar == 'r') {
             inputFile.get();
             if(matchNextChar('s') && matchNextChar('h') && matchNextChar('i')
-               && matchNextChar('f') && matchNextChar('t')) {
+               && matchNextChar('f') && matchNextChar('t') && matchNextChar(' ')) {
 
                 token.setToken(ARITHOP, "rshift");
                 return token;
@@ -279,10 +286,15 @@ Token Scanner::getToken() {
             // Words what start with M {MULT}
         else if (currentChar == 'm') {
             inputFile.get();
-            if(matchNextChar('u') && matchNextChar('l') && matchNextChar('t')) {
+            if(matchNextChar('u') && matchNextChar('l') && matchNextChar('t') && matchNextChar(' ')) {
                 //cout << "got mult" << endl;
                 //tokenStream.push_back({ARITHOP, "mult"});
                 token.setToken(ARITHOP, "mult");
+                return token;
+            }
+            else {
+                cout << "Syntax Error on line " << _lineNumber << endl;
+                token.setToken(LEXICAL_ERROR, "syn_err");
                 return token;
             }
         }
@@ -304,10 +316,14 @@ Token Scanner::getToken() {
             // Words what start with N {NOP}
         else if(currentChar == 'n') {
             inputFile.get();
-            if(matchNextChar('o') && matchNextChar('p')) {
+            if(matchNextChar('o') && matchNextChar('p') && matchNextChar(' ')) {
                 //cout << "Got nop" << endl;
                 //tokenStream.push_back({NOP, "nop"});
                 token.setToken(NOP, "nop");
+                return token;
+            } else {
+                cout << "Syntax Error on line " << _lineNumber << endl;
+                token.setToken(LEXICAL_ERROR, "syn_err");
                 return token;
             }
         }
@@ -315,12 +331,17 @@ Token Scanner::getToken() {
         else if (currentChar == 'o') {
             inputFile.get();
             if(matchNextChar('u') && matchNextChar('t') && matchNextChar('p')
-               && matchNextChar('u') && matchNextChar('t')) {
+               && matchNextChar('u') && matchNextChar('t') && matchNextChar(' ')) {
                 //cout << "Got output" << endl;
                // tokenStream.push_back({OUTPUT, "output"});
                token.setToken(OUTPUT, "output");
                return token;
 
+            }
+            else {
+                cout << "Syntax Error on line " << _lineNumber << endl;
+                token.setToken(LEXICAL_ERROR, "syn_err");
+                return token;
             }
         }
         else {
