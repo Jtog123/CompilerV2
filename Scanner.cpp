@@ -116,7 +116,7 @@ Token Scanner::getToken() {
             //potential non digit character
             char nextChar = inputFile.peek();
 
-            if(nextChar != ' ' && nextChar != '=' && nextChar != ',' && nextChar != '\n') {
+            if(nextChar != ' ' && nextChar != '=' && nextChar != ',' && nextChar != '\n' && nextChar != '\t') {
                 cout << "Syntax error on line " << _lineNumber << endl;
                 token.setToken(LEXICAL_ERROR, "syn_err");
                 eatTillDelimiter();

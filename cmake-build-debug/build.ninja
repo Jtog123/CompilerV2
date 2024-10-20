@@ -73,6 +73,12 @@ build CMakeFiles/CompilerV2.dir/Parser.cpp.obj: CXX_COMPILER__CompilerV2_unscann
   OBJECT_DIR = CMakeFiles\CompilerV2.dir
   OBJECT_FILE_DIR = CMakeFiles\CompilerV2.dir
 
+build CMakeFiles/CompilerV2.dir/BinaryExpr.cpp.obj: CXX_COMPILER__CompilerV2_unscanned_Debug C$:/Users/jtog8/Documents/CompilerV2/BinaryExpr.cpp || cmake_object_order_depends_target_CompilerV2
+  DEP_FILE = CMakeFiles\CompilerV2.dir\BinaryExpr.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\CompilerV2.dir
+  OBJECT_FILE_DIR = CMakeFiles\CompilerV2.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target CompilerV2
@@ -81,7 +87,7 @@ build CMakeFiles/CompilerV2.dir/Parser.cpp.obj: CXX_COMPILER__CompilerV2_unscann
 #############################################
 # Link the executable CompilerV2.exe
 
-build CompilerV2.exe: CXX_EXECUTABLE_LINKER__CompilerV2_Debug CMakeFiles/CompilerV2.dir/main.cpp.obj CMakeFiles/CompilerV2.dir/Token.cpp.obj CMakeFiles/CompilerV2.dir/Scanner.cpp.obj CMakeFiles/CompilerV2.dir/Parser.cpp.obj
+build CompilerV2.exe: CXX_EXECUTABLE_LINKER__CompilerV2_Debug CMakeFiles/CompilerV2.dir/main.cpp.obj CMakeFiles/CompilerV2.dir/Token.cpp.obj CMakeFiles/CompilerV2.dir/Scanner.cpp.obj CMakeFiles/CompilerV2.dir/Parser.cpp.obj CMakeFiles/CompilerV2.dir/BinaryExpr.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\CompilerV2.dir
