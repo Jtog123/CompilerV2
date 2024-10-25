@@ -27,10 +27,10 @@ void Parser::getTokens() {
 
     } while(token.getLexeme() != "eof");
 
-    for(auto& t : tokenVect) {
-        cout << t.getLexeme() << endl;
-    }
-    cout << "it ended" << endl;
+    //for(auto& t : tokenVect) {
+    //    cout << t.getLexeme() << endl;
+    //}
+    //cout << "it ended" << endl;
 
 }
 
@@ -39,10 +39,10 @@ void Parser::parse() {
     Token token;
 
     do {
-        //token = advance();
-        //cout << token.getLexeme();
+        token = advance();
+        cout << token.getLexeme();
 
-    } while (token.getTokenType() != TokenType::_EOF);
+    } while (!isAtEnd()); //token.getTokenType() != TokenType::_EOF
 
 }
 

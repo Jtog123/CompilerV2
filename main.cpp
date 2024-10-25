@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 
     Parser parser(argv[1]);
     parser.getTokens();
-    //parser.parse();
+    parser.parse();
 
 
     return 0;
