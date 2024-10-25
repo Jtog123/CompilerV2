@@ -42,6 +42,15 @@ void Parser::parse() {
         token = advance();
         cout << token.getLexeme();
 
+        switch (token.getTokenType()) {
+            case TokenType::LOADI :
+                validateLoadI();
+                break;
+            default:
+                cout << "Ending" << endl;
+                break;
+        }
+
     } while (!isAtEnd()); //token.getTokenType() != TokenType::_EOF
 
 }
@@ -54,6 +63,13 @@ Token Parser::advance() {
         return previous();
     }
 
+}
+
+bool Parser::validateLoadI() {
+    //Loadi constant into reg
+    // check structure
+    cout << "Validating LoadI" << endl;
+    return true;
 }
 
 Token Parser::previous() {

@@ -20,4 +20,6 @@ add_executable(CompilerV2 main.cpp
         t12.i
         t8.i
         t19.i
+        ParsingException.hpp
+        ParsingException.cpp
 )

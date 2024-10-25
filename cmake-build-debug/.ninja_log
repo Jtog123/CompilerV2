@@ -1,20 +1,8 @@
 # ninja log v5
-5	668	7515172670841978	CMakeFiles/CompilerV2.dir/main.cpp.obj	11cb4e85d4b96a28
-670	1025	7515172674365158	CompilerV2.exe	5266be87b175d5e4
-3	724	7515173658090562	build.ninja	7c0949dccd4b87a7
+3	620	7515184922723731	CMakeFiles/CompilerV2.dir/main.cpp.obj	11cb4e85d4b96a28
+744	1049	7515185295802599	CompilerV2.exe	5266be87b175d5e4
+3	724	7515187043134259	build.ninja	7c0949dccd4b87a7
 37	604	7515167464073927	CMakeFiles/CompilerV2.dir/Token.cpp.obj	a00baa976df6ab49
 14	666	7511706027857294	CMakeFiles/CompilerV2.dir/BinaryExpr.cpp.obj	b61dcc89a0dda856
-4	734	7515172350105355	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
-6	1066	7511703025299863	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
+5	743	7515185292766821	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
 5	685	7515176337992761	CMakeFiles/CompilerV2.dir/Scanner.cpp.obj	6ff78743ee2e9736
-686	2646	7515176357557498	CompilerV2.exe	5266be87b175d5e4
-6	735	7515177544297154	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
-736	1003	7515177546923482	CompilerV2.exe	5266be87b175d5e4
-4	816	7515177697798835	CMakeFiles/CompilerV2.dir/main.cpp.obj	11cb4e85d4b96a28
-817	1142	7515177701056664	CompilerV2.exe	5266be87b175d5e4
-5	859	7515178284593768	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
-861	1159	7515178287550495	CompilerV2.exe	5266be87b175d5e4
-4	734	7515178395114149	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
-735	1023	7515178397935361	CompilerV2.exe	5266be87b175d5e4
-4	598	7515180901600338	CMakeFiles/CompilerV2.dir/Parser.cpp.obj	46741fac8d61c4ba
-600	908	7515180904631934	CompilerV2.exe	5266be87b175d5e4

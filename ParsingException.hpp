@@ -1,0 +1,14 @@
+//
+// Created by jtog8 on 10/24/2024.
+//
+
+#ifndef COMPILERV2_PARSINGEXCEPTION_HPP
+#define COMPILERV2_PARSINGEXCEPTION_HPP
+
+
+class ParsingException {
+
+};
+
+
+#endif //COMPILERV2_PARSINGEXCEPTION_HPP

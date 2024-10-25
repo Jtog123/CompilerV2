@@ -32,6 +32,8 @@ public:
     Token peek();
     bool isAtEnd();
 
+    bool validateLoadI();
+
 private:
     Scanner myScanner;
     vector <Token> tokenVect;
