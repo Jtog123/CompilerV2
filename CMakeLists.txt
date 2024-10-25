@@ -18,6 +18,6 @@ add_executable(CompilerV2 main.cpp
         t17.i
         t4.i
         t12.i
-        Expr.hpp
-        BinaryExpr.hpp
-        BinaryExpr.cpp)
+        t8.i
+        t19.i
+)

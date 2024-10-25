@@ -7,8 +7,16 @@
 
 #include "scanner.hpp"
 #include <string>
+#include <vector>
 
 using namespace std;
+
+/*
+ * Arithop reg coma reg into reg
+ * Loadi constant into reg
+ * output constant
+ * nop
+ */
 
 class Parser {
 
@@ -17,10 +25,17 @@ public:
         // Initialize the Parser
     }
 
-    void printTokens();
+    void getTokens();
+    void parse();
+    Token advance();
+    Token previous();
+    Token peek();
+    bool isAtEnd();
 
 private:
     Scanner myScanner;
+    vector <Token> tokenVect;
+    int current = 0;
 
 };
 

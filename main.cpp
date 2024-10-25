@@ -2,7 +2,7 @@
 #include <fstream>
 #include "Scanner.hpp"
 #include "Parser.hpp"
-#include "BinaryExpr.hpp"
+
 
 int main(int argc, char* argv[]) {
     cout << endl;
@@ -10,12 +10,9 @@ int main(int argc, char* argv[]) {
     //scanner.readFile();
 
     Parser parser(argv[1]);
-    parser.printTokens();
+    parser.getTokens();
+    //parser.parse();
 
-    BinaryExpr bExpr {}; // automatically destroyed when out of scope
-    Expr& expr {bExpr};
-
-    expr.testing();
 
     return 0;
 }

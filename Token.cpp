@@ -20,6 +20,10 @@ string Token::getLexeme() {
     return lexeme;
 }
 
+TokenType Token::getTokenType() {
+    return tokenType;
+}
+
 void Token::print() {
     cout << "Token is: " << lexeme << endl;
 }
