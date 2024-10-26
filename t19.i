@@ -1,1 +1,1 @@
-output 20
+loadI 20 => r1

@@ -32,12 +32,23 @@ public:
     Token peek();
     bool isAtEnd();
 
-    bool validateLoadI();
+    void validateLoadI();
+    void validateMemop();
+    void validateNop();
+    void validateArithop();
+    void validateOutput();
+
+
+
 
 private:
     Scanner myScanner;
     vector <Token> tokenVect;
     int current = 0;
+    int _lineNumber = 1;
+
+    void incrementLineNumber();
+    int getLineNumber();
 
 };
 

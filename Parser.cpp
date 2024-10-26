@@ -5,6 +5,7 @@
 #include "Parser.hpp"
 #include <iostream>
 #include "TokenType.hpp"
+#include "ParsingException.hpp"
 
 using namespace std;
 
@@ -25,10 +26,10 @@ void Parser::getTokens() {
         tokenVect.push_back(token);
         //token.print();
 
-    } while(token.getLexeme() != "eof");
+    } while(token.getTokenType() != TokenType::_EOF);
 
     //for(auto& t : tokenVect) {
-    //    cout << t.getLexeme() << endl;
+    //    cout << t.getTokenType() << endl;
     //}
     //cout << "it ended" << endl;
 
@@ -38,20 +39,158 @@ void Parser::parse() {
     // fix later dont assume there are tokens
     Token token;
 
+    // loadI 20 => r1
+
     do {
-        token = advance();
-        cout << token.getLexeme();
+        token = peek();
+        cout << "Token is now " << token.getLexeme() << endl;
 
         switch (token.getTokenType()) {
+            case TokenType::MEMOP :
+                //advance();
+                validateMemop();
+                break;
             case TokenType::LOADI :
+                //advance();
                 validateLoadI();
+                break;
+            case TokenType::ARITHOP :
+                validateArithop();
+                break;
+            case TokenType::OUTPUT :
+                validateOutput();
+                break;
+            case TokenType::NOP :
+                validateNop();
+                break;
+            case TokenType::EOL :
+                advance();
+                incrementLineNumber();
                 break;
             default:
                 cout << "Ending" << endl;
+                advance();
+                //throw ParsingException("Parsing Error, Invalid Starting Token");
                 break;
         }
 
-    } while (!isAtEnd()); //token.getTokenType() != TokenType::_EOF
+    } while (!isAtEnd());
+
+}
+
+
+
+void Parser::validateMemop() {
+
+    //MEMOP REG INTO REG
+
+    cout << "Validating Load" << endl;
+    advance();
+    Token nextToken = peek();
+
+    //cout << "Current tok is " << nextToken.getLexeme() << endl;
+
+    if(nextToken.getTokenType() == TokenType::REGISTER) {
+        cout << "Got Register continue Validating" << endl;
+        advance();
+        nextToken = peek();
+
+        if(nextToken.getTokenType() == TokenType::INTO) {
+            cout << "Got INTO continue validating" << endl;
+            advance();
+            nextToken = peek();
+
+            if(nextToken.getTokenType() == TokenType::REGISTER) {
+                cout << "Got register continue validating" << endl;
+                advance();
+                cout << "Valid MEMOP Grammar returning" << endl;
+                return;
+
+            }
+            else {
+                throw ParsingException("Improper grammar next token should be REGISTER", getLineNumber());
+            }
+        }
+        else {
+            throw ParsingException("Improper grammar, next token should be INTO", getLineNumber());
+        }
+    }
+    else {
+        throw ParsingException("Improper grammar, next token should be Register", getLineNumber());
+    }
+
+
+
+}
+
+void Parser::validateLoadI() {
+    //Loadi constant into reg
+    // check structure  Loadi constant into reg
+
+    // loadI 20 => r1 \n
+
+    cout << "Validating LoadI" << endl;
+
+
+    advance();
+    Token nextToken = peek();
+
+    if(nextToken.getTokenType() == TokenType::CONSTANT) {
+        cout << "Got a Constant continue validating" << endl;
+        advance();
+        nextToken = peek();
+
+        if(nextToken.getTokenType() == TokenType::INTO) {
+            cout << "Got an Into continue validating" << endl;
+            advance();
+            nextToken = peek();
+
+            if(nextToken.getTokenType() == TokenType::REGISTER) {
+                cout << "Got a register continue validating" << endl;
+                advance();
+                //nextToken = peek();
+
+                cout << "Valid LOADI grammar returning" << endl;
+                return;
+
+                /*
+                if(nextToken.getTokenType() == TokenType::EOL || nextToken.getTokenType() == TokenType::_EOF) {
+                    cout << "Got a new line VALID LOADI GRAMMAR return" << endl;
+                    //advance();
+                    cout << "Current token is " << peek().getLexeme() << endl;
+                    return;
+                }
+                else {
+                    throw ParsingException("Improper grammar, next token should be EOL");
+                }
+                */
+            }
+            else {
+                throw ParsingException("Improper grammar, next token should be REGISTER", getLineNumber());
+            }
+        }
+        else {
+            throw ParsingException("Improper grammar, next token should be INTO", getLineNumber());
+        }
+
+    }
+    else {
+        throw ParsingException("Improper grammar, next token should be Constant", getLineNumber());
+    }
+
+
+
+}
+
+void Parser::validateArithop() {
+
+}
+
+void Parser::validateOutput() {
+
+}
+
+void Parser::validateNop() {
 
 }
 
@@ -62,14 +201,6 @@ Token Parser::advance() {
         ++current;
         return previous();
     }
-
-}
-
-bool Parser::validateLoadI() {
-    //Loadi constant into reg
-    // check structure
-    cout << "Validating LoadI" << endl;
-    return true;
 }
 
 Token Parser::previous() {
@@ -83,6 +214,14 @@ Token Parser::peek() {
 
 bool Parser::isAtEnd() {
     return peek().getTokenType() == TokenType::_EOF;
+}
+
+void Parser::incrementLineNumber() {
+    _lineNumber++;
+}
+
+int Parser::getLineNumber() {
+    return _lineNumber;
 }
 
 
