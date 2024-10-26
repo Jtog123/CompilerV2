@@ -76,6 +76,69 @@ void Parser::parse() {
 
     } while (!isAtEnd());
 
+    cout << "Parsing Complete" << endl;
+
+}
+
+void Parser::validateArithop() {
+    cout << "Validating arithop" << endl;
+    advance();
+    //artihop reg comma reg into reg
+
+    Token nextToken = peek();
+    if(nextToken.getTokenType() == TokenType::REGISTER) {
+        cout << "Got register continue validating" << endl;
+
+        advance();
+        nextToken = peek();
+
+        if(nextToken.getTokenType() == TokenType::COMMA) {
+            cout << "Got comma continue validating" << endl;
+
+            advance();
+            nextToken = peek();
+
+            if(nextToken.getTokenType() == TokenType::REGISTER) {
+                cout << "Got register continue validating" << endl;
+
+                advance();
+                nextToken = peek();
+
+                if(nextToken.getTokenType() == TokenType::INTO) {
+                    cout << "Got into continue validating" << endl;
+
+                    advance();
+                    nextToken = peek();
+
+                    if(nextToken.getTokenType() == TokenType::REGISTER) {
+                        cout << "Got Register continue validating" << endl;
+
+                        advance();
+                        nextToken = peek();
+
+                    }
+                    else {
+                        throw ParsingException("Improper grammar next token should be REGISTER", getLineNumber());
+                    }
+
+                }
+                else {
+                    throw ParsingException("Improper grammar next token should be REGISTER", getLineNumber());
+                }
+
+            }
+            else {
+                throw ParsingException("Improper grammar next token should be REGISTER", getLineNumber());
+            }
+
+        }
+        else {
+            throw ParsingException("Improper grammar next token should be REGISTER", getLineNumber());
+        }
+    }
+    else {
+        throw ParsingException("Improper grammar next token should be REGISTER", getLineNumber());
+    }
 }
 
 
@@ -182,15 +245,35 @@ void Parser::validateLoadI() {
 
 }
 
-void Parser::validateArithop() {
-
-}
 
 void Parser::validateOutput() {
+//* output constant
+    cout << "Validating output" << endl;
+    advance();
 
+    Token nextToken = peek();
+
+    if(nextToken.getTokenType() == TokenType::CONSTANT) {
+        cout << "valid output Grammar" << endl;
+        advance();
+        return;
+    }
+    else {
+        throw ParsingException("Improper grammar, next token should be Constant", getLineNumber());
+    }
 }
 
 void Parser::validateNop() {
+    advance();
+
+
+    Token nextToken = peek();
+    //cout << nextToken.getLexeme();
+
+    if(nextToken.getTokenType() != TokenType::EOL && nextToken.getTokenType() != TokenType::_EOF) {
+        throw ParsingException("Improper grammar, Token should not follow NOP", getLineNumber());
+    }
+    return;
 
 }
 
