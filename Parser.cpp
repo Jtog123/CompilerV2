@@ -7,6 +7,8 @@
 #include "TokenType.hpp"
 #include "ParsingException.hpp"
 
+//With syntax error token if we get a syntax error token bob out with error
+
 using namespace std;
 
 /*
@@ -67,6 +69,8 @@ void Parser::parse() {
                 advance();
                 incrementLineNumber();
                 break;
+            case TokenType::LEXICAL_ERROR:
+                throw ParsingException("Syntax Error", getLineNumber());
             default:
                 cout << "Ending" << endl;
                 advance();
