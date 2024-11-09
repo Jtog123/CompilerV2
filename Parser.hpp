@@ -27,18 +27,6 @@ public:
 
     void getTokens();
     void parse();
-    Token advance();
-    Token previous();
-    Token peek();
-    bool isAtEnd();
-
-    void validateLoadI();
-    void validateMemop();
-    void validateNop();
-    void validateArithop();
-    void validateOutput();
-
-
 
 
 private:
@@ -49,6 +37,18 @@ private:
 
     void incrementLineNumber();
     int getLineNumber();
+
+    Token advance();
+    Token previous();
+    Token peek();
+    bool isAtEnd();
+
+
+    void validateLoadI();
+    void validateMemop();
+    void validateNop();
+    void validateArithop();
+    void validateOutput();
 
 };
 

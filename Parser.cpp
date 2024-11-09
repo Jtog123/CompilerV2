@@ -49,11 +49,9 @@ void Parser::parse() {
 
         switch (token.getTokenType()) {
             case TokenType::MEMOP :
-                //advance();
                 validateMemop();
                 break;
             case TokenType::LOADI :
-                //advance();
                 validateLoadI();
                 break;
             case TokenType::ARITHOP :
@@ -127,7 +125,7 @@ void Parser::validateArithop() {
 
                 }
                 else {
-                    throw ParsingException("Improper grammar next token should be REGISTER", getLineNumber());
+                    throw ParsingException("Improper grammar next token should be INTO", getLineNumber());
                 }
 
             }
@@ -137,7 +135,7 @@ void Parser::validateArithop() {
 
         }
         else {
-            throw ParsingException("Improper grammar next token should be REGISTER", getLineNumber());
+            throw ParsingException("Improper grammar next token should be COMMA", getLineNumber());
         }
     }
     else {
