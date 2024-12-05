@@ -13,7 +13,7 @@
 
 enum TokenType{
     MEMOP, // 0 Unary
-    LOADI, // 1 unary needs to be int
+    lOADI, // 1 unary needs to be int
     ARITHOP, // 2 Binary expressions
     OUTPUT, // 3
     NOP, // 4

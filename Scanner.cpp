@@ -194,7 +194,7 @@ Token Scanner::getToken() {
                 //Check for accetped state LOADL
                 if(matchNextChar('I') && matchNextChar(' ')) {
                     //cout << "Got LOADI" << endl;
-                    token.setToken(LOADI, "loadi");
+                    token.setToken(lOADI, "loadi");
                     return token;
                 } else if(matchNextChar(' ')) {
                     //cout << "Got LOAD" << endl;

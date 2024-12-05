@@ -51,7 +51,7 @@ void Parser::parse() {
             case TokenType::MEMOP :
                 validateMemop();
                 break;
-            case TokenType::LOADI :
+            case TokenType::lOADI :
                 validateLoadI();
                 break;
             case TokenType::ARITHOP :
