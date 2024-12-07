@@ -61,7 +61,7 @@ Token Scanner::getToken() {
             //cout << "END OF LINE" << endl;
             inputFile.get();
             _lineNumber++;
-            token.setToken(EOL, "\\n");
+            token.setToken(EOL, "\\n", OP_TOSS);
             return token;
 
 
@@ -74,13 +74,13 @@ Token Scanner::getToken() {
         else if(currentChar == ',') {
             //cout << "Comma" << endl;
             inputFile.get();
-            token.setToken(COMMA, ",");
+            token.setToken(COMMA, ",", OP_TOSS);
             return token;
         }
         else if(currentChar == '/') {
             inputFile.get();
             if(matchNextChar('/')) {
-                token.setToken(COMMENT, "//");
+                token.setToken(COMMENT, "//", OP_TOSS);
 
                 //Encounter a comment get the whole line till we reach a new line
                 while(inputFile.peek() != '\n') {
@@ -97,7 +97,7 @@ Token Scanner::getToken() {
             inputFile.get();
             if(matchNextChar('>')) {
 
-                token.setToken(INTO, "=>");
+                token.setToken(INTO, "=>", OP_TOSS);
                 return token;
 
 
@@ -118,7 +118,7 @@ Token Scanner::getToken() {
 
             if(nextChar != ' ' && nextChar != '=' && nextChar != ',' && nextChar != '\n' && nextChar != '\t' && nextChar != EOF) {
                 cout << "Syntax error on line " << _lineNumber << endl;
-                token.setToken(LEXICAL_ERROR, "syn_err");
+                token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
                 eatTillDelimiter();
                 return token;
 
@@ -130,7 +130,7 @@ Token Scanner::getToken() {
                 //}
             }
 
-            token.setToken(CONSTANT, number);
+            token.setToken(CONSTANT, number, OP_TOSS);
             return token;
 
             /*
@@ -165,7 +165,7 @@ Token Scanner::getToken() {
                 // Error should probably be thrown here
 
                 //cout << "Got STORE" << endl;
-                    token.setToken(MEMOP, "store");
+                    token.setToken(MEMOP, "store", OP_STORE);
                     return token;
                 }
 
@@ -173,13 +173,13 @@ Token Scanner::getToken() {
                 // Looking for SUB
             else if(matchNextChar('u') && matchNextChar('b') && matchNextChar(' ')) {
                 //cout << "Got SUB" << endl;
-                token.setToken(ARITHOP, "sub");
+                token.setToken(ARITHOP, "sub", OP_SUB);
                 return token;
 
             }
             else {
                 cout << "Syntax Error on line: " << _lineNumber << " did you mean store or sub?" << endl;
-                token.setToken(LEXICAL_ERROR, "syn_err");
+                token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
                 eatTillDelimiter();
                 return token;
             }
@@ -194,16 +194,16 @@ Token Scanner::getToken() {
                 //Check for accetped state LOADL
                 if(matchNextChar('I') && matchNextChar(' ')) {
                     //cout << "Got LOADI" << endl;
-                    token.setToken(lOADI, "loadi");
+                    token.setToken(lOADI, "loadi", OP_LOADI);
                     return token;
                 } else if(matchNextChar(' ')) {
                     //cout << "Got LOAD" << endl;
-                    token.setToken(MEMOP, "load");
+                    token.setToken(MEMOP, "load", OP_LOAD);
                     return token;
                 }
                 else {
                     cout << "Syntax Error did you mean load or loadI? " << endl;
-                    token.setToken(LEXICAL_ERROR, "syn_err");
+                    token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
                     return token;
                 }
 
@@ -214,13 +214,13 @@ Token Scanner::getToken() {
                      matchNextChar('t') && matchNextChar(' ')) {
                 //cout << "Got lshift" << endl;
                 //tokenStream.push_back({ARITHOP, "lshift"});
-                token.setToken(ARITHOP, "lshift");
+                token.setToken(ARITHOP, "lshift", OP_LSHIFT);
                 return token;
             }
             else {
 
                 cout << "Syntax Error on line " << _lineNumber << endl;
-                token.setToken(LEXICAL_ERROR, "syn_err");
+                token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
                 return token;
             }
         }
@@ -230,7 +230,7 @@ Token Scanner::getToken() {
             if(matchNextChar('s') && matchNextChar('h') && matchNextChar('i')
                && matchNextChar('f') && matchNextChar('t') && matchNextChar(' ')) {
 
-                token.setToken(ARITHOP, "rshift");
+                token.setToken(ARITHOP, "rshift", OP_RSHIFT);
                 return token;
 
             }
@@ -242,7 +242,7 @@ Token Scanner::getToken() {
                 // is char after r a number or not
                 if(inputFile.eof() || ! isdigit(inputFile.peek())) {
                     cout << "Syntax error on line : "<< _lineNumber << " not a valid register "<< endl;
-                    token.setToken(LEXICAL_ERROR, "syn_err");
+                    token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
                     eatTillDelimiter();
                     return token;
 
@@ -255,7 +255,7 @@ Token Scanner::getToken() {
                         inputFile.get();
                     }
 
-                    token.setToken(REGISTER, registerName);
+                    token.setToken(REGISTER, registerName, OP_TOSS);
                     return token;
                 }
 
@@ -292,12 +292,13 @@ Token Scanner::getToken() {
             if(matchNextChar('u') && matchNextChar('l') && matchNextChar('t') && matchNextChar(' ')) {
                 //cout << "got mult" << endl;
                 //tokenStream.push_back({ARITHOP, "mult"});
-                token.setToken(ARITHOP, "mult");
+                token.setToken(ARITHOP, "mult", OP_MULT);
                 return token;
             }
             else {
                 cout << "Syntax Error on line " << _lineNumber << endl;
-                token.setToken(LEXICAL_ERROR, "syn_err");
+                token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
+
                 return token;
             }
         }
@@ -307,12 +308,12 @@ Token Scanner::getToken() {
             if(matchNextChar('d') && matchNextChar('d') && matchNextChar(' ')) {
                 //cout << "Got Add" << endl;
                 //tokenStream.push_back({ARITHOP, "add"});
-                token.setToken(ARITHOP, "add");
+                token.setToken(ARITHOP, "add", OP_ADD);
                 return token;
             }
             else{
                 cout << "Syntax error on line: " << _lineNumber  << endl;
-                token.setToken(LEXICAL_ERROR, "syn_err");
+                token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
                 return token;
             }
         }
@@ -322,11 +323,11 @@ Token Scanner::getToken() {
             if(matchNextChar('o') && matchNextChar('p') && matchNextChar(' ')) {
                 //cout << "Got nop" << endl;
                 //tokenStream.push_back({NOP, "nop"});
-                token.setToken(NOP, "nop");
+                token.setToken(NOP, "nop", OP_NOP);
                 return token;
             } else {
                 cout << "Syntax Error on line " << _lineNumber << endl;
-                token.setToken(LEXICAL_ERROR, "syn_err");
+                token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
                 return token;
             }
         }
@@ -337,13 +338,13 @@ Token Scanner::getToken() {
                && matchNextChar('u') && matchNextChar('t') && matchNextChar(' ')) {
                 //cout << "Got output" << endl;
                // tokenStream.push_back({OUTPUT, "output"});
-               token.setToken(OUTPUT, "output");
+               token.setToken(OUTPUT, "output", OP_OUTPUT);
                return token;
 
             }
             else {
                 cout << "Syntax Error on line " << _lineNumber << endl;
-                token.setToken(LEXICAL_ERROR, "syn_err");
+                token.setToken(LEXICAL_ERROR, "syn_err", OP_TOSS);
                 return token;
             }
         }
@@ -357,7 +358,7 @@ Token Scanner::getToken() {
     }
 
     //tokenStream.push_back({_EOF, "eof"});
-    token.setToken(_EOF, "eof");
+    token.setToken(_EOF, "eof", OP_TOSS);
     return token;
 
     //if(inputFile.eof()) {

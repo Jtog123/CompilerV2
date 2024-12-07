@@ -6,19 +6,24 @@
 #define COMPILERV2_TOKEN_HPP
 #include "TokenType.hpp"
 #include <string>
+#include "OpCodes.hpp"
 
 using namespace std;
 class Token {
 
     private:
         TokenType tokenType;
+        OpCodes opCode;
         string lexeme;
+
 
     public:
         Token();
-        void setToken(TokenType type, string lex);
+        //void setToken(TokenType type, string lex);
+        void setToken(TokenType type, string lex, OpCodes opcode);
         TokenType getTokenType();
         string getLexeme();
+        OpCodes getOpCodeType();
         void print();
 
 

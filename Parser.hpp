@@ -26,6 +26,7 @@ public:
     }
 
     void getTokens();
+    vector<OpCodes> getOpCodes();
     void parse();
 
 
@@ -34,6 +35,7 @@ private:
     vector <Token> tokenVect;
     int current = 0;
     int _lineNumber = 1;
+    vector<OpCodes> opCodeVect;
 
     void incrementLineNumber();
     int getLineNumber();

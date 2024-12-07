@@ -25,7 +25,7 @@ enum TokenType{
     EOL, // 10
     COMMENT, // 11
     TBD, // 12,
-    LEXICAL_ERROR,
+    LEXICAL_ERROR, // 13
     PARSING_ERROR
 
 };

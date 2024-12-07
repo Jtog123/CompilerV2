@@ -26,6 +26,15 @@ void Parser::getTokens() {
     do {
         token = myScanner.getToken();
         tokenVect.push_back(token);
+
+
+        // Only push back the OPcode if it is NOT OP_TOSS
+        if(token.getOpCodeType() == 10) {
+            continue;
+        } else {
+            opCodeVect.push_back(token.getOpCodeType());
+        }
+
         //token.print();
 
     } while(token.getTokenType() != TokenType::_EOF);
@@ -80,6 +89,11 @@ void Parser::parse() {
 
     cout << "Parsing Complete" << endl;
 
+}
+
+vector<OpCodes> Parser::getOpCodes() {
+    return opCodeVect;
+    //return full arr or one at a time?
 }
 
 void Parser::validateArithop() {

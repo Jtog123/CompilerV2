@@ -11,9 +11,14 @@ Token::Token(): tokenType(TBD), lexeme("") {
     // init empty token
 }
 
-void Token::setToken(TokenType type, string lex) {
+void Token::setToken(TokenType type, string lex, OpCodes opCo) {
     tokenType = type;
     lexeme = lex;
+    opCode = opCo;
+}
+
+OpCodes Token::getOpCodeType() {
+    return opCode;
 }
 
 string Token::getLexeme() {
