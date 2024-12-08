@@ -6,6 +6,7 @@
 #include <iostream>
 #include "TokenType.hpp"
 #include "ParsingException.hpp"
+#include "threeAddressCode.hpp"
 
 //With syntax error token if we get a syntax error token bob out with error
 
@@ -23,15 +24,20 @@ void Parser::getTokens() {
 
     Token token;
 
+
+
     do {
         token = myScanner.getToken();
         tokenVect.push_back(token);
+
 
 
         // Only push back the OPcode if it is NOT OP_TOSS
         if(token.getOpCodeType() == 10) {
             continue;
         } else {
+            //push back line number here?
+
             opCodeVect.push_back(token.getOpCodeType());
         }
 
@@ -46,15 +52,25 @@ void Parser::getTokens() {
 
 }
 
+
+
 void Parser::parse() {
     // fix later dont assume there are tokens
     Token token;
 
-    // loadI 20 => r1
+    int irLineNumber = 1;
+    struct threeAddressCode irLine;
+
 
     do {
         token = peek();
         cout << "Token is now " << token.getLexeme() << endl;
+
+        irLine.lineNumber=irLineNumber;
+        irLine.opC = token.getOpCodeType();
+        irLine.operand1=0;
+        irLine.operand2=0;
+        irLine.operand3=0;
 
         switch (token.getTokenType()) {
             case TokenType::MEMOP :

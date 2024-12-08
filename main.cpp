@@ -10,12 +10,19 @@ int main(int argc, char* argv[]) {
     //scanner.readFile();
 
     Parser parser(argv[1]);
+
+    //get all tokens first store in vector then parse through the vector
     parser.getTokens();
     parser.parse();
 
+
     vector<OpCodes> opCodes = parser.getOpCodes();
 
+    //first line should be
+    // 0 2 12 0 3
+
     for(auto code : opCodes) {
+        //cout << "Line number is " << parser.getLineNumber() << endl;
         cout << "opcode is" << endl;
         cout << code << endl;
     }

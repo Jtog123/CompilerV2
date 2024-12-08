@@ -108,7 +108,8 @@
 				3,
 				5,
 				17,
-				19
+				19,
+				20
 			]
 		},
 		{
@@ -233,6 +234,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "OpCodes.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "threeAddressCode.hpp",
 			"sourceGroupIndex" : 1
 		}
 	],

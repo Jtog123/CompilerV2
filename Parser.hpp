@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 
+
+
 using namespace std;
 
 /*
@@ -27,7 +29,9 @@ public:
 
     void getTokens();
     vector<OpCodes> getOpCodes();
+    int getLineNumber();
     void parse();
+    //vect
 
 
 private:
@@ -38,7 +42,7 @@ private:
     vector<OpCodes> opCodeVect;
 
     void incrementLineNumber();
-    int getLineNumber();
+    //int getLineNumber();
 
     Token advance();
     Token previous();
