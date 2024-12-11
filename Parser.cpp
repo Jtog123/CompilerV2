@@ -83,7 +83,8 @@ void Parser::parse() {
                 validateArithop();
                 break;
             case TokenType::OUTPUT :
-                validateOutput();
+                //validateOutput(&irLine)
+                validateOutput(&irLine);
                 break;
             case TokenType::NOP :
                 validateNop();
@@ -99,9 +100,20 @@ void Parser::parse() {
                 advance();
                 //throw ParsingException("Parsing Error, Invalid Starting Token");
                 break;
+
+        }
+
+        if(token.getTokenType() == TokenType::MEMOP || token.getTokenType() == TokenType::ARITHOP
+           || token.getTokenType() == TokenType::lOADI || token.getTokenType() == TokenType::OUTPUT
+           || token.getTokenType() == TokenType::NOP) {
+            parsedInstructions.push_back(irLine);
+            irLineNumber++;
         }
 
     } while (!isAtEnd());
+
+
+    //delete irLine;
 
     cout << "Parsing Complete" << endl;
 
@@ -278,7 +290,7 @@ void Parser::validateLoadI() {
 }
 
 
-void Parser::validateOutput() {
+void Parser::validateOutput(threeAddressCode* irline) {
 //* output constant
     cout << "Validating output" << endl;
     advance();
@@ -287,6 +299,8 @@ void Parser::validateOutput() {
 
     if(nextToken.getTokenType() == TokenType::CONSTANT) {
         cout << "valid output Grammar" << endl;
+        irline->operand1 = stoi(nextToken.getLexeme());
+        cout << irline->operand1 << " is wut it is "<< endl;
         advance();
         return;
     }
@@ -337,6 +351,10 @@ void Parser::incrementLineNumber() {
 
 int Parser::getLineNumber() {
     return _lineNumber;
+}
+
+const vector<threeAddressCode>& Parser::getParsedInstructions() const {
+    return parsedInstructions;
 }
 
 

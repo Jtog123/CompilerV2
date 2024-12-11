@@ -4,6 +4,7 @@
 #include "Parser.hpp"
 
 
+
 int main(int argc, char* argv[]) {
     cout << endl;
     //Scanner scanner(argv[1]);
@@ -15,17 +16,32 @@ int main(int argc, char* argv[]) {
     parser.getTokens();
     parser.parse();
 
+    const auto& instructions = parser.getParsedInstructions();
 
-    vector<OpCodes> opCodes = parser.getOpCodes();
+    //writes to current working directory
+    ofstream outputFile("irOutput.txt");
+    if(outputFile.is_open()) {
+        for(auto& instr : instructions) {
+            outputFile << instr.lineNumber << " " << instr.opC << " " << instr.operand1 << " "
+                       << instr.operand2 << " " << instr.operand3 << "\n";
+        }
+        outputFile.close();
+    }
+    else {
+        cerr << "faied to load output.txt" << endl;
+    }
+
+
+    //vector<OpCodes> opCodes = parser.getOpCodes();
 
     //first line should be
     // 0 2 12 0 3
 
-    for(auto code : opCodes) {
+    //for(auto code : opCodes) {
         //cout << "Line number is " << parser.getLineNumber() << endl;
-        cout << "opcode is" << endl;
-        cout << code << endl;
-    }
+    //    cout << "opcode is" << endl;
+    //    cout << code << endl;
+    //}
 
     //loop through token vect for Intermediate representation pass it to the class
     // use regex to strip numbers off token names

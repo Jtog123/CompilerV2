@@ -23,4 +23,5 @@ add_executable(CompilerV2 main.cpp
         ParsingException.hpp
         ParsingException.cpp
         OpCodes.hpp
+        t20.i
 )

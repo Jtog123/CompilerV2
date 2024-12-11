@@ -8,7 +8,7 @@
 #include "scanner.hpp"
 #include <string>
 #include <vector>
-
+#include "threeAddressCode.hpp"
 
 
 using namespace std;
@@ -31,6 +31,7 @@ public:
     vector<OpCodes> getOpCodes();
     int getLineNumber();
     void parse();
+    const vector<threeAddressCode>& getParsedInstructions() const;
     //vect
 
 
@@ -40,6 +41,7 @@ private:
     int current = 0;
     int _lineNumber = 1;
     vector<OpCodes> opCodeVect;
+    vector<threeAddressCode> parsedInstructions;
 
     void incrementLineNumber();
     //int getLineNumber();
@@ -54,7 +56,7 @@ private:
     void validateMemop();
     void validateNop();
     void validateArithop();
-    void validateOutput();
+    void validateOutput(threeAddressCode* irLine);
 
 };
 
