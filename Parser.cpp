@@ -132,7 +132,8 @@ void Parser::validateArithop(threeAddressCode* irLine) {
     Token nextToken = peek();
     if(nextToken.getTokenType() == TokenType::REGISTER) {
         cout << "Got register continue validating" << endl;
-
+        string numbersOnly = nextToken.getLexeme().substr(1);
+        irLine->operand1 = stoi(numbersOnly);
         advance();
         nextToken = peek();
 
@@ -144,6 +145,8 @@ void Parser::validateArithop(threeAddressCode* irLine) {
 
             if(nextToken.getTokenType() == TokenType::REGISTER) {
                 cout << "Got register continue validating" << endl;
+                string numbersOnly2 = nextToken.getLexeme().substr(1);
+                irLine->operand2 = stoi(numbersOnly2);
 
                 advance();
                 nextToken = peek();
@@ -156,7 +159,8 @@ void Parser::validateArithop(threeAddressCode* irLine) {
 
                     if(nextToken.getTokenType() == TokenType::REGISTER) {
                         cout << "Got Register continue validating" << endl;
-
+                        string numbersOnly3 = nextToken.getLexeme().substr(1);
+                        irLine->operand3 = stoi(numbersOnly3);
                         advance();
                         nextToken = peek();
 
@@ -199,16 +203,21 @@ void Parser::validateMemop(threeAddressCode* irLine) {
 
     if(nextToken.getTokenType() == TokenType::REGISTER) {
         cout << "Got Register continue Validating" << endl;
+        string numberOnly = nextToken.getLexeme().substr(1);
+        irLine->operand1 = stoi(numberOnly);
         advance();
         nextToken = peek();
 
         if(nextToken.getTokenType() == TokenType::INTO) {
             cout << "Got INTO continue validating" << endl;
+            irLine->operand2 = 0;
             advance();
             nextToken = peek();
 
             if(nextToken.getTokenType() == TokenType::REGISTER) {
                 cout << "Got register continue validating" << endl;
+                string numberOnly3 = nextToken.getLexeme().substr(1);
+                irLine->operand3 = stoi(numberOnly3);
                 advance();
                 cout << "Valid MEMOP Grammar returning" << endl;
                 return;
