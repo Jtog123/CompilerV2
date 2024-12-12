@@ -74,20 +74,20 @@ void Parser::parse() {
 
         switch (token.getTokenType()) {
             case TokenType::MEMOP :
-                validateMemop();
+                validateMemop(&irLine);
                 break;
             case TokenType::lOADI :
-                validateLoadI();
+                validateLoadI(&irLine);
                 break;
             case TokenType::ARITHOP :
-                validateArithop();
+                validateArithop(&irLine);
                 break;
             case TokenType::OUTPUT :
                 //validateOutput(&irLine)
                 validateOutput(&irLine);
                 break;
             case TokenType::NOP :
-                validateNop();
+                validateNop(&irLine);
                 break;
             case TokenType::EOL :
                 advance();
@@ -124,7 +124,7 @@ vector<OpCodes> Parser::getOpCodes() {
     //return full arr or one at a time?
 }
 
-void Parser::validateArithop() {
+void Parser::validateArithop(threeAddressCode* irLine) {
     cout << "Validating arithop" << endl;
     advance();
     //artihop reg comma reg into reg
@@ -187,7 +187,7 @@ void Parser::validateArithop() {
 
 
 
-void Parser::validateMemop() {
+void Parser::validateMemop(threeAddressCode* irLine) {
 
     //MEMOP REG INTO REG
 
@@ -230,7 +230,7 @@ void Parser::validateMemop() {
 
 }
 
-void Parser::validateLoadI() {
+void Parser::validateLoadI(threeAddressCode* irLine) {
     //Loadi constant into reg
     // check structure  Loadi constant into reg
 
@@ -244,16 +244,21 @@ void Parser::validateLoadI() {
 
     if(nextToken.getTokenType() == TokenType::CONSTANT) {
         cout << "Got a Constant continue validating" << endl;
+        irLine->operand1 = stoi(nextToken.getLexeme());
         advance();
         nextToken = peek();
 
         if(nextToken.getTokenType() == TokenType::INTO) {
             cout << "Got an Into continue validating" << endl;
+            irLine->operand2 = 0;
             advance();
             nextToken = peek();
 
             if(nextToken.getTokenType() == TokenType::REGISTER) {
                 cout << "Got a register continue validating" << endl;
+                //strip off register number
+                string numbersOnly = nextToken.getLexeme().substr(1);
+                irLine->operand3 = stoi(numbersOnly);
                 advance();
                 //nextToken = peek();
 
@@ -309,7 +314,7 @@ void Parser::validateOutput(threeAddressCode* irline) {
     }
 }
 
-void Parser::validateNop() {
+void Parser::validateNop(threeAddressCode* irLine) {
     advance();
 
 

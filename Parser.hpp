@@ -52,10 +52,10 @@ private:
     bool isAtEnd();
 
 
-    void validateLoadI();
-    void validateMemop();
-    void validateNop();
-    void validateArithop();
+    void validateLoadI(threeAddressCode* irLine);
+    void validateMemop(threeAddressCode* irLine);
+    void validateNop(threeAddressCode* irLine);
+    void validateArithop(threeAddressCode* irLine);
     void validateOutput(threeAddressCode* irLine);
 
 };
